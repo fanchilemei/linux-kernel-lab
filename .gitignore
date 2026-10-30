@@ -2,7 +2,11 @@
 *.o
 *.ko
 *.mod
+*.mod.c
 *.cmd
+*.dwo
+modules.order
+Module.symvers
 .env
 .vscode/
 .idea/

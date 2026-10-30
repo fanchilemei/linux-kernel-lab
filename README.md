@@ -1,48 +1,50 @@
 # linux-kernel-lab
 
-Skeleton lab for **Linux kernel and networking** learning: reading docs and patches, understanding concepts, and noting how to reproduce issues **safely** in a closed environment.
+Linux kernel learning lab for notes and benign module experiments.
 
-Focus is defensive understanding—not weaponized exploits.
+Use this repository to keep reading notes, document isolated builds, and try tiny out-of-tree modules that only print a log line. Work on a machine you administer, preferably a disposable virtual machine.
 
-## Scope
+## No exploit code
 
-In scope:
+This repository does not host offensive material. Do not add any of the following:
 
-- Kernel networking concepts (sockets, netfilter hooks at a conceptual level, routing basics).
-- Reading public patches and changelogs.
-- High-level notes on public CVEs (impact, affected versions, upstream fix).
-- Environment notes for QEMU/VM or container-based study machines you control.
+- Kernel exploit proof-of-concept code
+- Privilege-escalation procedures
+- Rootkits, stealth techniques, or module-hiding code
+- Attack walkthroughs or remote exploitation steps
+- Payloads, shellcode, or crash-trigger recipes
 
-Out of scope:
+Allowed material:
 
-- Weaponized exploits, exploit PoCs, or attack automation.
-- Step-by-step remote exploitation procedures.
-- Targeting any system you do not own or lack permission to test.
+- Notes and outlines written in your own words
+- Links to public documentation, advisories, and upstream fixes
+- High-level summaries of impact, affected versions, and mitigations
+- Benign modules in the style of `modules/hello` (log on load and unload)
+- Scripts that check installed tools or record kernel identity for patch triage
 
-## Suggested structure
+If a note describes a public bug, stay at names and impacts. Record how you verified a vendor or upstream fix. Do not record how to trigger the bug.
 
-```text
-docs/            # Concept notes, patch walkthroughs, CVE study (high level)
-environments/    # How to build/run an isolated study VM or kernel build env
-```
+## Layout
 
-## Studying public CVEs
+| Path | Purpose |
+| --- | --- |
+| `notes/` | Note template and high-level concept outlines |
+| `modules/` | Benign out-of-tree module stubs |
+| `scripts/` | Host tooling checks and the hello-module build helper |
+| `docs/` | Longer placeholders: policy, build log, reading list, CVE study template |
+| `environments/` | Habits for an isolated study VM |
 
-Keep CVE notes high level:
+## First steps
 
-- Link the NVD / vendor advisory and the upstream commit when available.
-- Summarize root cause and impact in your own words.
-- Record the fix and any detection or mitigation ideas.
-- If you reproduce something, do it only in an isolated VM, and document **verification of the patch**, not an attack recipe.
+1. Read the policy above (also in `docs/policy.md`).
+2. See which host tools are present: `bash scripts/verify_env.sh`
+3. Read `modules/hello/README.md` before building the stub.
+4. Copy `notes/TEMPLATE.md` when you start a topic.
 
-## Environments
+## Existing study notes
 
-Prefer disposable VMs or local QEMU. Snapshot before experiments. Do not bridge lab interfaces to untrusted networks.
-
-## Disclaimer
-
-Educational material for defensive learning. No warranty. Do not use this repository to harm systems or people.
+`docs/` already contains a high-level CVE study template and one public-advisory summary. Those files stay non-procedural. New CVE notes should follow `docs/CVE_STUDY_TEMPLATE.md`.
 
 ## License
 
-Add a license if you share environment scripts widely.
+There is no repository-wide license file yet. The hello module is marked `GPL-2.0` because it is a Linux kernel module.
